@@ -2,6 +2,9 @@ package entities.roles;
 
 import entities.types.Address;
 import entities.Order;
+import entities.types.OrderStatus;
+
+import java.util.stream.Stream;
 
 public class DeliveryPerson extends User {
     private Order currentOrder = null;
@@ -24,5 +27,14 @@ public class DeliveryPerson extends User {
 
     public void setCurrentPosition(Address currentPosition) {
         this.currentPosition = currentPosition;
+    }
+
+    @Override
+    public void updateOrder(String identification, OrderStatus status) throws Exception {
+        Order myOrder = getCurrentOrder();
+        if (myOrder.getNumber() != identification) {
+            throw new Exception("Identification number not valid.");
+        }
+        myOrder.setStatus(status);
     }
 }

@@ -8,7 +8,6 @@ public class Restaurant {
     private String description;
     private String contact;
 
-
     public Restaurant(String name, Address address, String description, String contact) {
         this.name = name;
         this.address = address;

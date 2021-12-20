@@ -1,15 +1,13 @@
 package entities.roles;
 
 import entities.types.Address;
-import entities.Order;
 import entities.types.OrderStatus;
 
-public class User {
+public abstract class User {
     private String username;
     private String password;
     private String name;
     private Address address;
-    private Order order;
 
     public User(String username, String password, String name, Address address) {
         this.username = username;
@@ -18,19 +16,13 @@ public class User {
         this.address = address;
     }
 
-    public void updateOrder(OrderStatus status) {
-        Order order = this.getOrder();
-        order.setStatus(status);
-        this.setOrder(order);
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+    /**
+     * Update state of the order from the object itself.
+     * @param identification Identification string of the order.
+     * @param status New status for the order.
+     * @throws Exception In case identification string doesn't exist in the object.
+     */
+    public abstract void updateOrder(String identification, OrderStatus status) throws Exception;
 
     public String getUsername() {
         return username;
