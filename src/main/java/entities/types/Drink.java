@@ -1,2 +1,5 @@
-package entities.types;public class Drink {
+package entities.types;
+
+public class Drink {
+
 }

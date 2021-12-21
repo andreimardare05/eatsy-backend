@@ -1,2 +1,4 @@
-package entities.types;public class SideDish {
+package entities.types;
+
+public class SideDish {
 }

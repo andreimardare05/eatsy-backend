@@ -1,12 +1,19 @@
 package entities.types;
 
 import entities.types.Address;
+import lombok.Builder;
 
+import java.util.List;
+
+@Builder
 public class Restaurant {
     private String name;
     private Address address;
     private String description;
     private String contact;
+    private String openingTime;
+    private String closingtime;
+    private List<MenuItems> menuItmes;
 
     public Restaurant(String name, Address address, String description, String contact) {
         this.name = name;

@@ -2,18 +2,20 @@ package entities.roles;
 
 import entities.types.Address;
 import entities.types.OrderStatus;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public abstract class User {
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
     private String name;
     private Address address;
 
-    public User(String username, String password, String name, Address address) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.address = address;
+    private User(UserBuilder builder) {
+        this.username = builder.username;
+        this.password = builder.password;
+        this.name = builder.name;
+        this.address = builder.address;
     }
 
     /**
@@ -24,7 +26,7 @@ public abstract class User {
      */
     public abstract void updateOrder(String identification, OrderStatus status) throws Exception;
 
-    public String getUsername() {
+    /*public String getUsername() {
         return username;
     }
 
@@ -54,5 +56,29 @@ public abstract class User {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+*/
+    // this is just a sketch
+    public static class UserBuilder
+    {
+        private final String username;
+        private final String password;
+        private String name;
+        private Address address;
+
+        public UserBuilder(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+
+        public UserBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public UserBuilder setAddress(Address address) {
+            this.address = address;
+            return this;
+        }
     }
 }

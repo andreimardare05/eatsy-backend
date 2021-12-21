@@ -1,2 +1,4 @@
-package entities.types;public class MainCourse {
+package entities.types;
+
+public class MainCourse {
 }

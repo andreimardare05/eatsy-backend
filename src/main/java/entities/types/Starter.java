@@ -1,2 +1,4 @@
-package entities.types;public class Starter {
+package entities.types;
+
+public class Starter {
 }

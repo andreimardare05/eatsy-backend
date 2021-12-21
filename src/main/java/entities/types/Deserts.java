@@ -1,2 +1,4 @@
-package entities.types;public class Deserts {
+package entities.types;
+
+public class Deserts {
 }

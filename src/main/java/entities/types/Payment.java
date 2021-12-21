@@ -1,2 +1,4 @@
-package entities.types;public class Payment {
+package entities.types;
+
+public class Payment {
 }
