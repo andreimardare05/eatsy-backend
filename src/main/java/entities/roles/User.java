@@ -1,9 +1,10 @@
 package entities.roles;
 
+import entities.models.Observer;
+import entities.OrderDetails;
 import entities.types.Address;
-import entities.types.OrderStatus;
 
-public abstract class User {
+public abstract class User implements Observer {
     private String username;
     private String password;
     private String name;
@@ -18,11 +19,10 @@ public abstract class User {
 
     /**
      * Update state of the order from the object itself.
-     * @param identification Identification string of the order.
-     * @param status New status for the order.
+     * @param details New details for the order (new status).
      * @throws Exception In case identification string doesn't exist in the object.
      */
-    public abstract void updateOrder(String identification, OrderStatus status) throws Exception;
+    public abstract void update(OrderDetails details) throws Exception;
 
     public String getUsername() {
         return username;
