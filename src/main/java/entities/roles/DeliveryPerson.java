@@ -1,23 +1,23 @@
 package entities.roles;
 
+import entities.OrderDetails;
 import entities.types.Address;
-import entities.Order;
-import entities.types.OrderStatus;
-
-import java.util.stream.Stream;
 
 public class DeliveryPerson extends User {
-    private Order currentOrder = null;
+    private OrderDetails currentOrder = null;
     private Address currentPosition =  new Address(0,0, "");
 
-    public DeliveryPerson(String username, String password, String name, Address address) {
+    public DeliveryPerson(String username, String password, String name, Address address, OrderDetails currentOrder, Address currentPosition) {
         super(username, password, name, address);
+        this.currentOrder = currentOrder;
+        this.currentPosition = currentPosition;
     }
-    public Order getCurrentOrder() {
+
+    public OrderDetails getCurrentOrder() {
         return currentOrder;
     }
 
-    public void setCurrentOrder(Order currentOrder) {
+    public void setCurrentOrder(OrderDetails currentOrder) {
         this.currentOrder = currentOrder;
     }
 
@@ -30,11 +30,11 @@ public class DeliveryPerson extends User {
     }
 
     @Override
-    public void updateOrder(String identification, OrderStatus status) throws Exception {
-        Order myOrder = getCurrentOrder();
-        if (myOrder.getNumber() != identification) {
+    public void update(OrderDetails details) throws Exception {
+        OrderDetails myOrder = getCurrentOrder();
+        if (myOrder.getNumber() != details.getNumber()) {
             throw new Exception("Identification number not valid.");
         }
-        myOrder.setStatus(status);
+        myOrder.setStatus(details.getStatus());
     }
 }

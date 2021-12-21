@@ -1,21 +1,18 @@
 package entities;
 
-import entities.roles.User;
-import entities.types.OrderStatus;
+import entities.models.Observer;
+import entities.models.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order {
-    private String number;
-    private String comment;
-    private OrderStatus status;
-    private List<User> usersInvolved = new ArrayList<>();
+public class Order implements Subject {
+    private OrderDetails details;
+    private List<Observer> usersInvolved = new ArrayList<>();
 
-    public Order(String number, String comment, OrderStatus status) {
-        this.number = number;
-        this.comment = comment;
-        this.status = status;
+    public Order(OrderDetails details, List<Observer> usersInvolved) {
+        this.details = details;
+        this.usersInvolved = usersInvolved;
     }
 
     /**
@@ -23,7 +20,8 @@ public class Order {
      *
      * @param user User involved in the order.
      */
-    public void registerUser(User user) {
+    @Override
+    public void registerObserver(Observer user) {
         usersInvolved.add(user);
     }
 
@@ -32,47 +30,38 @@ public class Order {
      *
      * @param user User involved in the order.
      */
-    public void unregisterUser(User user) {
+    @Override
+    public void unregisterObserver(Observer user) {
         usersInvolved.remove(user);
     }
 
     /**
      * Notifies a user from the list of users involved in the order.
-     *
-     * @param identification Identification string for the order.
-     * @param status Status of the order.
      */
-    public void notifyStatus(String identification, OrderStatus status) {
+    @Override
+    public void notifyObservers() {
         usersInvolved.forEach(user -> {
             try {
-                user.updateOrder(identification, status);
+                user.update(details);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
     }
 
-    public String getNumber() {
-        return number;
+    public OrderDetails getDetails() {
+        return details;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setDetails(OrderDetails details) {
+        this.details = details;
     }
 
-    public String getComment() {
-        return comment;
+    public List<Observer> getUsersInvolved() {
+        return usersInvolved;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
+    public void setUsersInvolved(List<Observer> usersInvolved) {
+        this.usersInvolved = usersInvolved;
     }
 }

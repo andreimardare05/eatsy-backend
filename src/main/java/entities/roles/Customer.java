@@ -1,31 +1,30 @@
 package entities.roles;
 
+import entities.OrderDetails;
 import entities.types.Address;
-import entities.Order;
-import entities.types.OrderStatus;
 
 public class Customer extends User {
-    private Order currentOrder = null;
+    private OrderDetails currentOrder = null;
 
-    public Customer(String username, String password, String name, Address address, Order currentOrder) {
+    public Customer(String username, String password, String name, Address address, OrderDetails currentOrder) {
         super(username, password, name, address);
         this.currentOrder = currentOrder;
     }
 
-    public Order getCurrentOrder() {
+    public OrderDetails getCurrentOrder() {
         return currentOrder;
     }
 
-    public void setCurrentOrder(Order currentOrder) {
+    public void setCurrentOrder(OrderDetails currentOrder) {
         this.currentOrder = currentOrder;
     }
 
     @Override
-    public void updateOrder(String identification, OrderStatus status) throws Exception {
-        Order myOrder = getCurrentOrder();
-        if (myOrder.getNumber() != identification) {
+    public void update(OrderDetails details) throws Exception {
+        OrderDetails myOrder = getCurrentOrder();
+        if (myOrder.getNumber() != myOrder.getNumber()) {
             throw new Exception("Identification number not valid.");
         }
-        myOrder.setStatus(status);
+        myOrder.setStatus(myOrder.getStatus());
     }
 }
