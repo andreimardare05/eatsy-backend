@@ -18,16 +18,14 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    private String username;
     private String email;
     private String password;
     @OneToOne
     private Role role;
 
-    public User(String firstName, String lastName,String username, String email, String encode) {
+    public User(String firstName, String lastName, String email, String encode) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
         this.email = email;
         this.password = encode;
     }

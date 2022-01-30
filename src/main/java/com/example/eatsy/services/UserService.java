@@ -36,9 +36,8 @@ public class UserService {
 
         // Create new user's account
         User user = User.builder()
-                .firstName(signUpRequest.getFistName())
+                .firstName(signUpRequest.getFirstName())
                 .lastName(signUpRequest.getLastName())
-                .username(signUpRequest.getUsername())
                 .email(signUpRequest.getEmail())
                 .password(encoder.encode(signUpRequest.getPassword()))
                 .build();
@@ -46,19 +45,19 @@ public class UserService {
         String strRole = signUpRequest.getRole();
 
         switch (strRole) {
-            case "admin":
+            case "ROLE_ADMIN":
                 Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                 user.setRole(adminRole);
 
                 break;
-            case "restaurant manager":
+            case "ROLE_RESTAURANT_MANAGER":
                 Role managerRole = roleRepository.findByName(ERole.ROLE_RESTAURANT_MANAGER)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                 user.setRole(managerRole);
 
                 break;
-            case "delivery man":
+            case "ROLE_DELIVERY":
                 Role deliveryRole = roleRepository.findByName(ERole.ROLE_DELIVERY_MAN)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                 user.setRole(deliveryRole);
