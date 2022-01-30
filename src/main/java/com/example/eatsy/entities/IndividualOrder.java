@@ -1,7 +1,7 @@
-package entities;
+package com.example.eatsy.entities;
 
-import entities.models.Observer;
-import entities.types.OrderStatus;
+import com.example.eatsy.observer.OrderDetails;
+import com.example.eatsy.observer.models.Observer;
 
 import java.util.List;
 

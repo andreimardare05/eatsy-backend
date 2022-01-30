@@ -1,8 +1,8 @@
-package entities.roles;
+package com.example.eatsy.observer.roles;
 
-import entities.models.Observer;
-import entities.OrderDetails;
-import entities.types.Address;
+import com.example.eatsy.entities.types.Address;
+import com.example.eatsy.observer.OrderDetails;
+import com.example.eatsy.observer.models.Observer;
 
 public abstract class User implements Observer {
     private String username;

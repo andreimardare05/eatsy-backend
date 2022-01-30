@@ -1,12 +1,20 @@
-package entities.types;
+package com.example.eatsy.entities.types;
 
-import entities.types.Address;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
+import java.util.List;
+
+@Builder
+@AllArgsConstructor
 public class Restaurant {
     private String name;
     private Address address;
     private String description;
     private String contact;
+    private String openingTime;
+    private String closingtime;
+    private List<MenuItems> menuItmes;
 
     public Restaurant(String name, Address address, String description, String contact) {
         this.name = name;
