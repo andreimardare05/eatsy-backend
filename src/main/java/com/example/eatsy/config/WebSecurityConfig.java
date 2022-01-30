@@ -48,7 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/webjars/**",
                 "/swagger-ui/**");
     }
-
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {

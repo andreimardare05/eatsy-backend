@@ -35,47 +35,40 @@ public class UserService {
     public User save(SignupRequest signUpRequest) {
 
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+        User user = User.builder()
+                .firstName(signUpRequest.getFistName())
+                .lastName(signUpRequest.getLastName())
+                .username(signUpRequest.getUsername())
+                .email(signUpRequest.getEmail())
+                .password(encoder.encode(signUpRequest.getPassword()))
+                .build();
 
-        Set<String> strRoles = signUpRequest.getRole();
-        Set<Role> roles = new HashSet<>();
+        String strRole = signUpRequest.getRole();
 
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_CUSTOMER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
+        switch (strRole) {
+            case "admin":
+                Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                user.setRole(adminRole);
 
-                        break;
-                    case "restaurant manager":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_RESTAURANT_MANAGER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
+                break;
+            case "restaurant manager":
+                Role managerRole = roleRepository.findByName(ERole.ROLE_RESTAURANT_MANAGER)
+                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                user.setRole(managerRole);
 
-                        break;
-                    case "delivery man":
-                        Role deliveryRole = roleRepository.findByName(ERole.ROLE_DELIVERY_MAN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(deliveryRole);
+                break;
+            case "delivery man":
+                Role deliveryRole = roleRepository.findByName(ERole.ROLE_DELIVERY_MAN)
+                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                user.setRole(deliveryRole);
 
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_CUSTOMER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
-            });
-        }
-
-        user.setRoles(roles);
+                break;
+            default:
+                Role userRole = roleRepository.findByName(ERole.ROLE_CUSTOMER)
+                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                user.setRole(userRole);
+        };
         return userRepository.save(user);
     }
 }
