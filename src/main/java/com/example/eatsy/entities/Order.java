@@ -1,7 +1,7 @@
-package entities;
+package com.example.eatsy.entities;
 
-import entities.roles.User;
-import entities.types.OrderStatus;
+import com.example.eatsy.entities.roles.User;
+import com.example.eatsy.entities.types.OrderStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,40 +16,6 @@ public class Order {
         this.number = number;
         this.comment = comment;
         this.status = status;
-    }
-
-    /**
-     * Attach a user to the list of users involved in the order.
-     *
-     * @param user User involved in the order.
-     */
-    public void registerUser(User user) {
-        usersInvolved.add(user);
-    }
-
-    /**
-     * Detach a user from the list of users involved in the order.
-     *
-     * @param user User involved in the order.
-     */
-    public void unregisterUser(User user) {
-        usersInvolved.remove(user);
-    }
-
-    /**
-     * Notifies a user from the list of users involved in the order.
-     *
-     * @param identification Identification string for the order.
-     * @param status Status of the order.
-     */
-    public void notifyStatus(String identification, OrderStatus status) {
-        usersInvolved.forEach(user -> {
-            try {
-                user.updateOrder(identification, status);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
     }
 
     public String getNumber() {

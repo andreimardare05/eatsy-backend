@@ -1,5 +1,5 @@
 package com.example.eatsy.entities.roles;
-
+/*
 import com.example.eatsy.entities.types.Address;
 import com.example.eatsy.entities.Order;
 import com.example.eatsy.entities.types.OrderStatus;
@@ -14,7 +14,8 @@ public class Customer extends User {
 
 
     @Builder
-    public Customer(String username, String password, String name, Address address, Order currentOrder, Payment payment) {
+    public Customer(String username, String password, String name, String email, String phone, Order currentOrder, Payment payment) {
+        super(username, password, name, email, phone);
         this.currentOrder = currentOrder;
         this.payment = payment;
     }
@@ -31,3 +32,4 @@ public class Customer extends User {
         myOrder.setStatus(status);
     }
 }
+*/

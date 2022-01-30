@@ -1,5 +1,5 @@
 package com.example.eatsy.entities.roles;
-
+/*
 import com.example.eatsy.entities.types.Address;
 import com.example.eatsy.entities.Order;
 import com.example.eatsy.entities.types.OrderStatus;
@@ -13,13 +13,12 @@ import java.util.stream.Stream;
 
 @Getter
 @AllArgsConstructor
-
 public class Admin extends User {
     private List<Order> orders = new ArrayList<>();
 
     @Builder
-    public Admin(String username, String password, String name, Address address, List<Order> orders) {
-        //super(username, password, name, address);
+    public Admin(String username, String password, String name, String email, String phone, List<Order> orders) {
+        super(username, password, name, email, phone);
         this.orders = orders;
     }
 
@@ -36,3 +35,4 @@ public class Admin extends User {
         myOrder.findFirst().get().setStatus(status);
     }
 }
+*/

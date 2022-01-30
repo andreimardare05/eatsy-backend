@@ -1,2 +1,8 @@
-package com.example.eatsy.entities.roles;public enum ERoles {
+package com.example.eatsy.entities.roles;
+
+public enum ERole {
+    ROLE_CUSTOMER,
+    ROLE_RESTAURANT_MANAGER,
+    ROLE_DELIVERY_MAN,
+    ROLE_ADMIN
 }

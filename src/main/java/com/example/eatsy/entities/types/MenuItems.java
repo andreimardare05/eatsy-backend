@@ -1,4 +1,4 @@
-package entities.types;
+package com.example.eatsy.entities.types;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

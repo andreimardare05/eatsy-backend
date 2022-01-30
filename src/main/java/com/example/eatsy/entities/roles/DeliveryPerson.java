@@ -1,21 +1,21 @@
-package entities.roles;
+package com.example.eatsy.entities.roles;
 
-import entities.types.Address;
-import entities.Order;
-import entities.types.OrderStatus;
+import com.example.eatsy.entities.types.Address;
+import com.example.eatsy.entities.Order;
+import com.example.eatsy.entities.types.OrderStatus;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.util.stream.Stream;
-
+/*
 @Getter
+@AllArgsConstructor
 public class DeliveryPerson extends User {
     private Order currentOrder = null;
     private Address currentPosition =  new Address(0,0, "");
 
     @Builder
-    public DeliveryPerson(String username, String password, String name, Address address, Order currentOrder, Address currentPosition) {
-        //super(username, password, name, address);
+    public DeliveryPerson(String username, String password, String name, String email, String phone, Order currentOrder, Address currentPosition) {
+        super(username, password, name, email, phone);
         this.currentPosition = currentPosition;
         this.currentOrder = currentOrder;
     }
@@ -31,3 +31,4 @@ public class DeliveryPerson extends User {
         myOrder.setStatus(status);
     }
 }
+*/

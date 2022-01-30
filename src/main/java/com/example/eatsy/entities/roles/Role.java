@@ -1,17 +1,22 @@
-package entities.roles;
+package com.example.eatsy.entities.roles;
+
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
+@Table(name = "roles")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Column
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private ERole name;
 
-    @Column
-    private String description;
 }

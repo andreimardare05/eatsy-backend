@@ -1,6 +1,6 @@
-package entities;
+package com.example.eatsy.entities;
 
-import entities.types.OrderStatus;
+import com.example.eatsy.entities.types.OrderStatus;
 
 public class IndividualOrder extends Order {
     public IndividualOrder(String number, String comment, OrderStatus details) {
