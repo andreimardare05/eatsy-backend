@@ -12,7 +12,6 @@ import lombok.Getter;
 public class DeliveryPerson extends User {
     private Order currentOrder = null;
     private Address currentPosition =  new Address(0,0, "");
-
     @Builder
     public DeliveryPerson(String username, String password, String name, String email, String phone, Order currentOrder, Address currentPosition) {
         super(username, password, name, email, phone);
@@ -22,7 +21,6 @@ public class DeliveryPerson extends User {
     public Order getCurrentOrder() {
         return currentOrder;
     }
-
     public void updateOrder(String identification, OrderStatus status) throws Exception {
         Order myOrder = getCurrentOrder();
         if (myOrder.getNumber() != identification) {

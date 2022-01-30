@@ -1,26 +1,16 @@
-package com.example.eatsy.entities;
+package entities;
 
-import com.example.eatsy.entities.roles.User;
-import com.example.eatsy.entities.types.OrderStatus;
-import entities.OrderDetails;
-import entities.models.Observer;
+import entities.types.OrderStatus;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Order {
+public class OrderDetails {
     private String number;
     private String comment;
     private OrderStatus status;
-    private List<User> usersInvolved = new ArrayList<>();
 
-    public Order(String number, String comment, OrderStatus status) {
+    public OrderDetails(String number, String comment, OrderStatus status) {
         this.number = number;
         this.comment = comment;
         this.status = status;
-    }
-
-    public Order(OrderDetails details, List<Observer> usersInvolved) {
     }
 
     public String getNumber() {

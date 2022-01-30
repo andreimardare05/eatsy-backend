@@ -1,9 +1,24 @@
 package com.example.eatsy.entities;
 
-import com.example.eatsy.entities.types.OrderStatus;
+import entities.OrderDetails;
+import entities.models.Observer;
+
+import java.util.List;
 
 public class IndividualOrder extends Order {
-    public IndividualOrder(String number, String comment, OrderStatus details) {
-        super(number, comment, details);
+    private String allergens;
+
+    public IndividualOrder(OrderDetails details, List<Observer> usersInvolved, String allergens) {
+        super(details, usersInvolved);
+        this.allergens = allergens;
     }
+
+    public String getAllergens() {
+        return allergens;
+    }
+
+    public void setAllergens(String allergens) {
+        this.allergens = allergens;
+    }
+
 }
