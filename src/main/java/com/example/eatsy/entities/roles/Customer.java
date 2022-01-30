@@ -1,9 +1,9 @@
-package entities.roles;
+package com.example.eatsy.entities.roles;
 
-import entities.types.Address;
-import entities.Order;
-import entities.types.OrderStatus;
-import entities.types.Payment;
+import com.example.eatsy.entities.types.Address;
+import com.example.eatsy.entities.Order;
+import com.example.eatsy.entities.types.OrderStatus;
+import com.example.eatsy.entities.types.Payment;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,7 +15,6 @@ public class Customer extends User {
 
     @Builder
     public Customer(String username, String password, String name, Address address, Order currentOrder, Payment payment) {
-        super(username, password, name, address);
         this.currentOrder = currentOrder;
         this.payment = payment;
     }
@@ -24,7 +23,6 @@ public class Customer extends User {
         return currentOrder;
     }
 
-    @Override
     public void updateOrder(String identification, OrderStatus status) throws Exception {
         Order myOrder = getCurrentOrder();
         if (myOrder.getNumber() != identification) {

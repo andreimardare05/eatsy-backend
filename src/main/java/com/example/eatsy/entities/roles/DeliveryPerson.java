@@ -15,7 +15,7 @@ public class DeliveryPerson extends User {
 
     @Builder
     public DeliveryPerson(String username, String password, String name, Address address, Order currentOrder, Address currentPosition) {
-        super(username, password, name, address);
+        //super(username, password, name, address);
         this.currentPosition = currentPosition;
         this.currentOrder = currentOrder;
     }
@@ -23,7 +23,6 @@ public class DeliveryPerson extends User {
         return currentOrder;
     }
 
-    @Override
     public void updateOrder(String identification, OrderStatus status) throws Exception {
         Order myOrder = getCurrentOrder();
         if (myOrder.getNumber() != identification) {
