@@ -84,7 +84,6 @@ public class AuthController {
         }
 
         userService.save(signUpRequest);
-
         return ResponseEntity.ok("User registered successfully!");
     }
 }
