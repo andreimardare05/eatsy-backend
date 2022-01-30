@@ -40,12 +40,6 @@ public class AuthController {
     private UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private PasswordEncoder encoder;
-
-    @Autowired
     private JwtUtils jwtUtils;
 
     @Autowired
