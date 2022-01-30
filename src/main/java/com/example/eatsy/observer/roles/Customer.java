@@ -1,7 +1,7 @@
-package entities.roles;
+package com.example.eatsy.observer.roles;
 
-import entities.OrderDetails;
-import entities.types.Address;
+import com.example.eatsy.entities.types.Address;
+import com.example.eatsy.observer.OrderDetails;
 
 public class Customer extends User {
     private OrderDetails currentOrder = null;

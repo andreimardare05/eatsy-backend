@@ -1,6 +1,4 @@
-package entities.models;
-
-import entities.models.Observer;
+package com.example.eatsy.observer.models;
 
 public interface Subject {
     void registerObserver(Observer observer);

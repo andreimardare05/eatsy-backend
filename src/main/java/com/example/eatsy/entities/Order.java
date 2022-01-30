@@ -2,8 +2,8 @@ package com.example.eatsy.entities;
 
 import com.example.eatsy.entities.roles.User;
 import com.example.eatsy.entities.types.OrderStatus;
-import entities.OrderDetails;
-import entities.models.Observer;
+import com.example.eatsy.observer.OrderDetails;
+import com.example.eatsy.observer.models.Observer;
 
 import java.util.ArrayList;
 import java.util.List;

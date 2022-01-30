@@ -1,6 +1,7 @@
-package entities;
+package com.example.eatsy.observer;
 
-import entities.types.OrderStatus;
+
+import com.example.eatsy.entities.types.OrderStatus;
 
 public class OrderDetails {
     private String number;
