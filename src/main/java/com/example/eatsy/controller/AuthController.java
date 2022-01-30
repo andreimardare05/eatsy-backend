@@ -10,6 +10,8 @@ import com.example.eatsy.entities.roles.UserDetailsImpl;
 import com.example.eatsy.repositories.RoleRepository;
 import com.example.eatsy.repositories.UserRepository;
 import com.example.eatsy.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -67,7 +69,8 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
+    @Operation(description = "Role: admin/restaurant manager/delivery man/customer")
+    public ResponseEntity<?> registerUser( @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
