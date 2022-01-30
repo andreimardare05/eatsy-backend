@@ -1,19 +1,12 @@
 package com.example.eatsy.services;
 
 import com.example.eatsy.dto.SignupRequest;
-import com.example.eatsy.dto.UserDto;
 import com.example.eatsy.entities.roles.ERole;
 import com.example.eatsy.entities.roles.Role;
 import com.example.eatsy.entities.roles.User;
 import com.example.eatsy.repositories.RoleRepository;
 import com.example.eatsy.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
