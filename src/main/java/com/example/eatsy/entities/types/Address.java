@@ -1,42 +1,26 @@
 package com.example.eatsy.entities.types;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address {
-    public long longitude;
-    public long latitude;
-    public String details;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public long id;
+    public double longitude;
+    public double latitude;
+    public String address;
 
-    public Address(long longitude, long latitude) {
-        this.longitude = longitude;
-        this.latitude = latitude;
-    }
-
-    public Address(long longitude, long latitude, String details) {
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.details = details;
-    }
-
-    public long getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(long longitude) {
-        this.longitude = longitude;
-    }
-
-    public long getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(long latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
 }

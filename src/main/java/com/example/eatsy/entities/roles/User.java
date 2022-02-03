@@ -1,6 +1,7 @@
 package com.example.eatsy.entities.roles;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
 import javax.persistence.*;
@@ -11,7 +12,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@Builder
+@SuperBuilder
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +23,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    private Status userStatus;
     @OneToOne
     private Role role;
 

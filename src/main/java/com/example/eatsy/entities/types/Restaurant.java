@@ -1,41 +1,43 @@
 package com.example.eatsy.entities.types;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.example.eatsy.entities.UserOrder;
+import com.example.eatsy.entities.roles.RestaurantManager;
+import com.example.eatsy.entities.roles.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Entity
+@Data
 public class Restaurant {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
+    @OneToOne(cascade = {CascadeType.ALL})
     private Address address;
     private String description;
     private String contact;
-    private String openingTime;
-    private String closingtime;
-    private List<MenuItems> menuItmes;
+    private Integer openingTime;
+    private Integer closingTime;
 
-    public Restaurant(String name, Address address, String description, String contact) {
-        this.name = name;
-        this.address = address;
-        this.description = description;
-        this.contact = contact;
-    }
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private List<UserOrder> userOrders;
 
-    public String getName() {
-        return name;
-    }
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<MenuItem> menuItemList;
 
-    public Address getAddress() {
-        return address;
-    }
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne(cascade = {CascadeType.ALL},mappedBy = "restaurant")
+    private RestaurantManager restaurantManager;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getContact() {
-        return contact;
-    }
 }
