@@ -1,10 +1,8 @@
 package com.example.eatsy.services;
 
-import com.example.eatsy.config.JwtUtils;
 import com.example.eatsy.dto.AddressDto;
 import com.example.eatsy.dto.RestaurantDto;
 import com.example.eatsy.entities.roles.RestaurantManager;
-import com.example.eatsy.entities.roles.User;
 import com.example.eatsy.entities.types.Address;
 import com.example.eatsy.entities.types.MenuItem;
 import com.example.eatsy.entities.types.Restaurant;

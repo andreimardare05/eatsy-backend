@@ -19,6 +19,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity getAllUsers() {
+        return ResponseEntity.ok(this.userService.getAllUsers());
+    }
+
+    @DeleteMapping("/delete/{deliveryId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity deleteUserById(@Valid @PathVariable long userId) {
+        this.userService.deleteUserById(userId);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(null);
+    }
+
     @PutMapping("/edit/{userId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity editUserById(@RequestBody UserDto userDto) {

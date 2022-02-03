@@ -3,6 +3,7 @@ package com.example.eatsy.entities.roles;
 import com.example.eatsy.entities.UserOrder;
 import com.example.eatsy.entities.types.Address;
 import com.example.eatsy.entities.types.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +23,7 @@ import java.util.List;
 public class DeliveryPerson extends User {
     @OneToMany
     @JoinTable(name= "delivery_orders")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<UserOrder> orders;
     @OneToOne
     private Address currentPosition;

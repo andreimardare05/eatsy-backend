@@ -4,6 +4,7 @@ import com.example.eatsy.entities.UserOrder;
 import com.example.eatsy.entities.types.Address;
 import com.example.eatsy.entities.types.OrderStatus;
 import com.example.eatsy.entities.types.Payment;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.List;
 public class Customer extends User {
     @OneToMany
     @JoinTable(name= "customer_orders")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<UserOrder> orderList;
 
 /*
