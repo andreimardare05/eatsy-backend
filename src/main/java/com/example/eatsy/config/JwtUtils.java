@@ -26,15 +26,22 @@ public class JwtUtils {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
         return Jwts.builder()
-                .setSubject((userPrincipal.getEmail()))
+                .setSubject(userPrincipal.getEmail())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .claim("user-id", userPrincipal.getId())
                 .compact();
     }
 
-    public String getUserNameFromJwtToken(String token) {
+    public String getUsernameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public long getIdFromJwtToken(String token) {
+        //System.out.println("lalal");
+        //System.out.println("user id"+ Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody());
+        return (long) 2;//Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().get("user_id");
     }
 
     public boolean validateJwtToken(String authToken) {

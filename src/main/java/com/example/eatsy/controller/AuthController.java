@@ -25,12 +25,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -69,7 +63,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    @Operation(description = "Role: admin/restaurant manager/delivery man/customer")
+    @Operation(description = "Role: ROLE_ADMIN/ROLE_RESTURANT_MANAGER/ROLE_DELIVERY/ROLE_CUSTOMER")
     public ResponseEntity<?> registerUser( @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity

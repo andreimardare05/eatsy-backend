@@ -1,9 +1,9 @@
 package com.example.eatsy.services;
 
+import com.example.eatsy.config.JwtUtils;
 import com.example.eatsy.dto.SignupRequest;
-import com.example.eatsy.entities.roles.ERole;
-import com.example.eatsy.entities.roles.Role;
-import com.example.eatsy.entities.roles.User;
+import com.example.eatsy.entities.roles.*;
+import com.example.eatsy.repositories.AdminRepository;
 import com.example.eatsy.repositories.RoleRepository;
 import com.example.eatsy.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,8 @@ public class UserService {
     @Autowired
     private PasswordEncoder encoder;
 
-
     @Autowired
-    private UserRepository userRepository;
-
+    private UserRepository<User> userRepository;
 
     public List<User> findAll() {
         List<User> list = new ArrayList<>();
@@ -34,40 +32,58 @@ public class UserService {
 
     public User save(SignupRequest signUpRequest) {
 
-        // Create new user's account
-        User user = User.builder()
-                .firstName(signUpRequest.getFirstName())
-                .lastName(signUpRequest.getLastName())
-                .email(signUpRequest.getEmail())
-                .password(encoder.encode(signUpRequest.getPassword()))
-                .build();
-
         String strRole = signUpRequest.getRole();
 
         switch (strRole) {
             case "ROLE_ADMIN":
                 Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                user.setRole(adminRole);
+                Admin admin = Admin.builder()
+                        .firstName(signUpRequest.getFirstName())
+                        .lastName(signUpRequest.getLastName())
+                        .email(signUpRequest.getEmail())
+                        .password(encoder.encode(signUpRequest.getPassword()))
+                        .role(adminRole)
+                        .build();
+                return userRepository.save(admin);
 
-                break;
             case "ROLE_RESTAURANT_MANAGER":
                 Role managerRole = roleRepository.findByName(ERole.ROLE_RESTAURANT_MANAGER)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                user.setRole(managerRole);
+                RestaurantManager restaurantManager = RestaurantManager.builder()
+                        .firstName(signUpRequest.getFirstName())
+                        .lastName(signUpRequest.getLastName())
+                        .email(signUpRequest.getEmail())
+                        .password(encoder.encode(signUpRequest.getPassword()))
+                        .role(managerRole)
+                        .userStatus(Status.PENDING)
+                        .build();
+                return userRepository.save(restaurantManager);
 
-                break;
             case "ROLE_DELIVERY":
                 Role deliveryRole = roleRepository.findByName(ERole.ROLE_DELIVERY_MAN)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                user.setRole(deliveryRole);
+                DeliveryPerson deliveryPerson  = DeliveryPerson.builder()
+                        .firstName(signUpRequest.getFirstName())
+                        .lastName(signUpRequest.getLastName())
+                        .email(signUpRequest.getEmail())
+                        .password(encoder.encode(signUpRequest.getPassword()))
+                        .role(deliveryRole)
+                        .userStatus(Status.PENDING)
+                        .build();
+                return userRepository.save(deliveryPerson);
 
-                break;
             default:
-                Role userRole = roleRepository.findByName(ERole.ROLE_CUSTOMER)
+                Role customerRole = roleRepository.findByName(ERole.ROLE_CUSTOMER)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                user.setRole(userRole);
-        };
-        return userRepository.save(user);
+                Customer customer  = Customer.builder()
+                        .firstName(signUpRequest.getFirstName())
+                        .lastName(signUpRequest.getLastName())
+                        .email(signUpRequest.getEmail())
+                        .password(encoder.encode(signUpRequest.getPassword()))
+                        .role(customerRole)
+                        .build();
+                return userRepository.save(customer);
+        }
     }
 }

@@ -1,18 +1,31 @@
 package com.example.eatsy.entities.roles;
 
+import com.example.eatsy.entities.UserOrder;
 import com.example.eatsy.entities.types.Address;
-import com.example.eatsy.entities.Order;
 import com.example.eatsy.entities.types.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-/*
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+import javax.persistence.*;
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
+//@PrimaryKeyJoinColumn(name = "delivery_id")
+@DiscriminatorValue("delivery")
+@Entity
+@SuperBuilder
 public class DeliveryPerson extends User {
-    private Order currentOrder = null;
-    private Address currentPosition =  new Address(0,0, "");
-    @Builder
+    @OneToMany
+    @JoinTable(name= "delivery_orders")
+    private List<UserOrder> orders;
+    @OneToOne
+    private Address currentPosition;
+   /* @Builder
     public DeliveryPerson(String username, String password, String name, String email, String phone, Order currentOrder, Address currentPosition) {
         super(username, password, name, email, phone);
         this.currentPosition = currentPosition;
@@ -27,6 +40,5 @@ public class DeliveryPerson extends User {
             throw new Exception("Identification number not valid.");
         }
         myOrder.setStatus(status);
-    }
+    }*/
 }
-*/
