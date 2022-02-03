@@ -28,12 +28,8 @@ public class RestaurantService {
         this.restaurantManagerRepository = restaurantManagerRepository;
     }
 
-    public Restaurant add(RestaurantDto restaurantDto, long user_id) {
-        /*Optional<Restaurant> restaurantOptional = restaurantRepository.findByNameAndAddress();
-        if (!restaurantOptional.isPresent()) {
-            throw new RuntimeException("Restaurant not found!");
-        }*/
-        RestaurantManager restaurantManager = restaurantManagerRepository.findById(user_id).get();
+    public Restaurant add(RestaurantDto restaurantDto) {
+        RestaurantManager restaurantManager = restaurantManagerRepository.findById(restaurantDto.getManager()).get();
         AddressDto addressDto = restaurantDto.getAddress();
         Address address = new Address();
         if (addressDto != null) {

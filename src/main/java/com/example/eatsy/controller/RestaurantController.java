@@ -27,10 +27,7 @@ public class RestaurantController {
     @PreAuthorize("hasRole('RESTAURANT_MANAGER')")
     public ResponseEntity add(@Valid @RequestBody RestaurantDto restaurantDto,
                               @RequestHeader (name="Authorization") String token) {
-        long user_id = restaurantDto.getManager();
-        //long user_id = jwtUtils.getIdFromJwtToken(token);
-        System.out.println("here"+user_id);
-        return ResponseEntity.ok(this.restaurantService.add(restaurantDto, user_id));
+        return ResponseEntity.ok(this.restaurantService.add(restaurantDto));
     }
 
     @GetMapping("/{restaurantId}")
@@ -38,11 +35,10 @@ public class RestaurantController {
         return ResponseEntity.ok(this.restaurantService.getRestaurantById(restaurantId));
     }
 
-    @DeleteMapping("/delete/{restaurantId}")
+    @DeleteMapping("/delete/{restaurantId}/user/{userId}")
     public ResponseEntity<String> deleteRestaurantById(@Valid @PathVariable long restaurantId,
-                                                       @RequestHeader (name="Authorization") String token) {
-        long user_id = jwtUtils.getIdFromJwtToken(token);
-        this.restaurantService.deleteRestaurantById(restaurantId, user_id);
+                                                       long userId) {
+        this.restaurantService.deleteRestaurantById(restaurantId, userId);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("Restaurant deleted");
     }

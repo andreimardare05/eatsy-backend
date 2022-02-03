@@ -38,12 +38,6 @@ public class JwtUtils {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
-    public long getIdFromJwtToken(String token) {
-        //System.out.println("lalal");
-        //System.out.println("user id"+ Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody());
-        return (long) 2;//Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().get("user_id");
-    }
-
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
