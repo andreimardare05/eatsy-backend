@@ -17,6 +17,4 @@ public class RestaurantDto {
     private Integer openingTime;
     private Integer closingTime;
     private List<MenuItemDto> menuItems;
-    private long manager;
-
 }

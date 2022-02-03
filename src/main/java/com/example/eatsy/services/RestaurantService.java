@@ -43,7 +43,7 @@ public class RestaurantService {
                     .address(restaurantDto.getAddress().getAddress())
                     .build();
         }
-        List<MenuItem> menuItemsList = restaurantDto.getMenuItems().stream()
+        List<MenuItem> menuItems = restaurantDto.getMenuItems().stream()
                 .map(
                        item -> MenuItem.builder()
                                .description(item.getDescription())
@@ -58,7 +58,7 @@ public class RestaurantService {
                 .description(restaurantDto.getDescription())
                 .openingTime(restaurantDto.getOpeningTime())
                 .closingTime(restaurantDto.getClosingTime())
-                .menuItemList(menuItemsList)
+                .menuItems(menuItems)
                 .restaurantManager(restaurantManager)
                 .build();
 

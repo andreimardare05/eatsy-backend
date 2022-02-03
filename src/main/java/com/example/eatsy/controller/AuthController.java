@@ -3,22 +3,16 @@ import com.example.eatsy.config.JwtUtils;
 import com.example.eatsy.dto.JwtResponse;
 import com.example.eatsy.dto.LoginRequest;
 import com.example.eatsy.dto.SignupRequest;
-import com.example.eatsy.entities.roles.ERole;
-import com.example.eatsy.entities.roles.Role;
-import com.example.eatsy.entities.roles.User;
 import com.example.eatsy.entities.roles.UserDetailsImpl;
-import com.example.eatsy.repositories.RoleRepository;
 import com.example.eatsy.repositories.UserRepository;
 import com.example.eatsy.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,6 +53,7 @@ public class AuthController {
                 userDetails.getFirstName(),
                 userDetails.getLastName(),
                 userDetails.getEmail(),
+                userDetails.getUserStatus(),
                 role));
     }
 
@@ -71,7 +66,6 @@ public class AuthController {
                     .body("Error: Email is already in use!");
         }
 
-        userService.save(signUpRequest);
-        return ResponseEntity.ok("User registered successfully!");
+        return ResponseEntity.ok(userService.save(signUpRequest));
     }
 }

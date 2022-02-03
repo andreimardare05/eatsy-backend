@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DeliveryService {
@@ -17,4 +18,10 @@ public class DeliveryService {
     public List<DeliveryPerson> getAllDelivery() {
         return deliveryRepository.findAll();
     }
+
+    public void deleteDeliveryManById(long id) {
+        Optional<DeliveryPerson> deliveryPerson = deliveryRepository.findById(id);
+        deliveryRepository.delete(deliveryPerson.get());
+    }
+
 }
