@@ -31,9 +31,9 @@ public class RestaurantController {
         return ResponseEntity.ok(this.restaurantService.add(restaurantDto, userId));
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @PreAuthorize("hasRole('RESTAURANT_MANAGER')")
-    public ResponseEntity getRestaurantById(@RequestHeader (name="Authorization") String token) {
+    public ResponseEntity getRestaurant(@RequestHeader (name="Authorization") String token) {
         long managerId = Long.parseLong(jwtUtils.getIdFromJwtToken(token.split(" ")[1]));
         return ResponseEntity.ok(this.restaurantService.getRestaurantByManagerId(managerId));
     }
@@ -44,23 +44,20 @@ public class RestaurantController {
         long managerId = Long.parseLong(jwtUtils.getIdFromJwtToken(token.split(" ")[1]));
         this.restaurantService.deleteRestaurantByManagerId(managerId);
         return ResponseEntity.status(HttpStatus.OK)
-                .body("Restaurant deleted");
+                .body(null);
     }
-
 
     @DeleteMapping("/delete/{restaurantId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteRestaurantById(@Valid @PathVariable long restaurantId) {
         this.restaurantService.deleteRestaurantById(restaurantId);
         return ResponseEntity.status(HttpStatus.OK)
-                .body("Restaurant deleted");
+                .body(null);
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity getAllRestaurants() {
         List<Restaurant> restaurants = this.restaurantService.getAllRestaurants();
         return ResponseEntity.ok(restaurants);
     }
-
 }
