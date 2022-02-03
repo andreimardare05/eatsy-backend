@@ -46,6 +46,15 @@ public class UserService {
         return userRepository.save(updatedUser);
     }
 
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public void deleteUserById(long id) {
+        Optional<User> user = userRepository.findById(id);
+        userRepository.delete(user.get());
+    }
+
     public User save(SignupRequest signUpRequest) {
 
         String strRole = signUpRequest.getRole();
