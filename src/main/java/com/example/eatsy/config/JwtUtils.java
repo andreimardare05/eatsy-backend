@@ -4,8 +4,10 @@ package com.example.eatsy.config;
 import java.util.Date;
 
 import com.example.eatsy.entities.roles.UserDetailsImpl;
+import com.example.eatsy.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,8 @@ import io.jsonwebtoken.*;
 @Component
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+    @Autowired
+    private UserRepository userRepository;
 
     @Value("${jwt.secret}")
     private String jwtSecret;
@@ -36,6 +40,15 @@ public class JwtUtils {
 
     public String getUsernameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public String getIdFromJwtToken(String token) {
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().get("user-id").toString();
+    }
+
+    public long getIdFromJwtToken2(String token) {
+        String username = getUsernameFromJwtToken(token);
+        return userRepository.findIdByEmail(username);
     }
 
     public boolean validateJwtToken(String authToken) {

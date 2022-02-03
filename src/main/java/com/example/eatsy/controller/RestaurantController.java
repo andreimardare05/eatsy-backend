@@ -27,23 +27,37 @@ public class RestaurantController {
     @PreAuthorize("hasRole('RESTAURANT_MANAGER')")
     public ResponseEntity add(@Valid @RequestBody RestaurantDto restaurantDto,
                               @RequestHeader (name="Authorization") String token) {
-        return ResponseEntity.ok(this.restaurantService.add(restaurantDto));
+        long userId = Long.parseLong(jwtUtils.getIdFromJwtToken(token.split(" ")[1]));
+        return ResponseEntity.ok(this.restaurantService.add(restaurantDto, userId));
     }
 
-    @GetMapping("/{restaurantId}")
-    public ResponseEntity getRestaurantById(@Valid @PathVariable long restaurantId) {
-        return ResponseEntity.ok(this.restaurantService.getRestaurantById(restaurantId));
+    @GetMapping("/")
+    @PreAuthorize("hasRole('RESTAURANT_MANAGER')")
+    public ResponseEntity getRestaurantById(@RequestHeader (name="Authorization") String token) {
+        long managerId = Long.parseLong(jwtUtils.getIdFromJwtToken(token.split(" ")[1]));
+        return ResponseEntity.ok(this.restaurantService.getRestaurantByManagerId(managerId));
     }
 
-    @DeleteMapping("/delete/{restaurantId}/user/{userId}")
-    public ResponseEntity<String> deleteRestaurantById(@Valid @PathVariable long restaurantId,
-                                                       long userId) {
-        this.restaurantService.deleteRestaurantById(restaurantId, userId);
+    @DeleteMapping("/delete")
+    @PreAuthorize("hasRole('RESTAURANT_MANAGER')")
+    public ResponseEntity<String> deleteRestaurant( @RequestHeader (name="Authorization") String token) {
+        long managerId = Long.parseLong(jwtUtils.getIdFromJwtToken(token.split(" ")[1]));
+        this.restaurantService.deleteRestaurantByManagerId(managerId);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("Restaurant deleted");
     }
 
-    @GetMapping("/restaurants")
+
+    @DeleteMapping("/delete/{restaurantId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> deleteRestaurantById(@Valid @PathVariable long restaurantId) {
+        this.restaurantService.deleteRestaurantById(restaurantId);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("Restaurant deleted");
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity getAllRestaurants() {
         List<Restaurant> restaurants = this.restaurantService.getAllRestaurants();
         return ResponseEntity.ok(restaurants);

@@ -28,8 +28,12 @@ public class RestaurantService {
         this.restaurantManagerRepository = restaurantManagerRepository;
     }
 
-    public Restaurant add(RestaurantDto restaurantDto) {
-        RestaurantManager restaurantManager = restaurantManagerRepository.findById(restaurantDto.getManager()).get();
+    public Restaurant add(RestaurantDto restaurantDto, long managerId) {
+        Restaurant restaurantByManagerId = getRestaurantByManagerId(managerId);
+        if(restaurantByManagerId != null) {
+            throw new RuntimeException("Manager has restaurant");
+        }
+        RestaurantManager restaurantManager = restaurantManagerRepository.findById(managerId).get();
         AddressDto addressDto = restaurantDto.getAddress();
         Address address = new Address();
         if (addressDto != null) {
@@ -61,31 +65,23 @@ public class RestaurantService {
         Restaurant savedRestaurant = restaurantRepository.save(restaurant);
         restaurantManager.setRestaurant(savedRestaurant);
         restaurantManagerRepository.save(restaurantManager);
-
         return savedRestaurant;
     }
 
-    public Restaurant getRestaurantById(long id) {
-        Optional<Restaurant> restaurantOptional = restaurantRepository.findById(id);
-        if (!restaurantOptional.isPresent()) {
-            throw new RuntimeException("Restaurant not found!");
-        }
-        return restaurantOptional.get();
+    public Restaurant getRestaurantByManagerId(long id) {
+        Restaurant restaurant = restaurantRepository.findByManagerId(id);
+        return restaurant;
     }
 
-    public void deleteRestaurantById(long id, long user_id) {
-        Optional<Restaurant> restaurantOptional = restaurantRepository.findById(id);
+    public void deleteRestaurantByManagerId(long id) {
+        Restaurant restaurant = restaurantRepository.findByManagerId(id);
+        restaurantRepository.delete(restaurant);
+    }
 
-        if (!restaurantOptional.isPresent() ) {
-            throw new RuntimeException("Restaurant not found!");
-        }
 
-        Optional<RestaurantManager> restaurantManagerOptional = restaurantManagerRepository.findById(user_id);
-        if(restaurantManagerOptional.isPresent() && restaurantOptional.get().getId() != user_id) {
-            throw new RuntimeException("User and the restaurant manager do not match!");
-        }
-
-        restaurantRepository.delete(restaurantOptional.get());
+    public void deleteRestaurantById(long id) {
+        Optional<Restaurant> restaurant = restaurantRepository.findById(id);
+        restaurantRepository.delete(restaurant.get());
     }
 
     public List<Restaurant> getAllRestaurants() {
