@@ -41,5 +41,4 @@ public class Restaurant {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(cascade = {CascadeType.ALL},mappedBy = "restaurant")
     private RestaurantManager restaurantManager;
-
 }

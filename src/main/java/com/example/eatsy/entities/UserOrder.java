@@ -36,6 +36,7 @@ public class UserOrder {
     private OrderStatus status;
     @OneToOne
     private Payment payment;
+
     @OneToOne(cascade = {CascadeType.ALL})
     private Address address;
     private double total;
