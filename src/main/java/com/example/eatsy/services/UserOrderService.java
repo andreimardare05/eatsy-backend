@@ -78,6 +78,10 @@ public class UserOrderService {
         return userOrderRepository.findAllByRestaurant(restaurantId);
     }
 
+    public List<UserOrder> getAllOrders() {
+        return userOrderRepository.findAll();
+    }
+
     public UserOrder updateUserOrder(UserOrderDto userOrderDto, long userId) {
         Optional<UserOrder> orderFound = userOrderRepository.findById(userOrderDto.getId());
         if (!orderFound.isPresent())
@@ -87,7 +91,7 @@ public class UserOrderService {
         updatedUserOrder.setStatus(userOrderDto.getStatus());
 
         User user = userRepository.findById(userId);
-        if (user.getRole().equals(ERole.ROLE_DELIVERY_MAN)) {
+        if (user.getRole().equals(ERole.ROLE_DELIVERY)) {
             DeliveryPerson deliveryPerson = deliveryRepository.findById(userId);
             updatedUserOrder.setDeliveryPerson(deliveryPerson);
         }

@@ -20,15 +20,19 @@ public class UserOrderController {
 
     @PostMapping("/add")
     public ResponseEntity save(@RequestBody UserOrderDto userOrderDto) {
-       // long userId = Long.parseLong(jwtUtils.getIdFromJwtToken(token.split(" ")[1]));
         return ResponseEntity.ok(this.userOrderService.save(userOrderDto));
     }
 
     @GetMapping("/restaurant/{resturantId}")
     @PreAuthorize("hasRole('RESTAURANT_MANAGER') or hasRole('DELIVERY_MAN') or hasRole('ADMIN')")
     public ResponseEntity getRestaurantOrders(@PathVariable long resturantId) {
-        // long userId = Long.parseLong(jwtUtils.getIdFromJwtToken(token.split(" ")[1]));
         return ResponseEntity.ok(this.userOrderService.getRestaurantOrders(resturantId));
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity getAllOrders() {
+        return ResponseEntity.ok(this.userOrderService.getAllOrders());
     }
 
     @PutMapping("/edit")

@@ -3,6 +3,8 @@ package com.example.eatsy.dto;
 import com.example.eatsy.entities.types.OrderStatus;
 import lombok.Getter;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.List;
 
 @Getter

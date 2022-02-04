@@ -13,4 +13,7 @@ public interface UserOrderRepository extends CrudRepository<UserOrder, Long> {
 
     @Query("select o from UserOrder o where o.restaurant.id = :id")
     List<UserOrder> findAllByRestaurant(long id);
+
+    List<UserOrder> findAll();
+
 }
