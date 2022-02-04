@@ -37,13 +37,13 @@ public class UserOrderController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('RESTAURANT_MANAGER') or hasRole('DELIVERY') or hasRole('ADMIN')")
     public ResponseEntity getAllOrders() {
         return ResponseEntity.ok(this.userOrderService.getAllOrders());
     }
 
     @PutMapping("/edit")
-    @PreAuthorize("hasRole('RESTAURANT_MANAGER') or hasRole('DELIVERY_MAN') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('RESTAURANT_MANAGER') or hasRole('DELIVERY') or hasRole('ADMIN')")
     public ResponseEntity editOrder(@RequestBody UserOrderDto userOrderDto,
                                     @RequestHeader (name="Authorization") String token) {
         long userId = Long.parseLong(jwtUtils.getIdFromJwtToken(token.split(" ")[1]));
