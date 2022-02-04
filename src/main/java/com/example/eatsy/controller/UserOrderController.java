@@ -30,7 +30,7 @@ public class UserOrderController {
     }
 
     @GetMapping("/user")
-    @PreAuthorize("hasRole('RESTAURANT_MANAGER') or hasRole('DELIVERY_MAN') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity getUserOrders(@RequestHeader (name="Authorization") String token) {
         long customerId = Long.parseLong(jwtUtils.getIdFromJwtToken(token.split(" ")[1]));
         return ResponseEntity.ok(this.userOrderService.getUserOrders(customerId));
