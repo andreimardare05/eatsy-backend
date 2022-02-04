@@ -63,6 +63,7 @@ public class RestaurantService {
         Restaurant savedRestaurant = restaurantRepository.save(restaurant);
         restaurantManager.setRestaurant(savedRestaurant);
         restaurantManagerRepository.save(restaurantManager);
+
         return savedRestaurant;
     }
 

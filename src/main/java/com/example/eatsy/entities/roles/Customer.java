@@ -20,7 +20,7 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 public class Customer extends User {
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name= "customer_orders")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<UserOrder> orderList;

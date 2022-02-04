@@ -1,5 +1,6 @@
 package com.example.eatsy.entities.types;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,6 +19,8 @@ public class MenuItem {
     private String name;
     private String description;
     private Double price;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
+    @JoinColumn(name = "restaurant_id", insertable = false, updatable = false)
     private Restaurant restaurant;
 }
