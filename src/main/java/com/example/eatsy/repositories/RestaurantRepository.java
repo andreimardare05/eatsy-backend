@@ -1,22 +1,15 @@
 package com.example.eatsy.repositories;
 
 import com.example.eatsy.entities.types.Restaurant;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.FluentQuery;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 
-@Repository
-public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
+public interface RestaurantRepository extends CrudRepository<Restaurant, Long> {
 
     @Query("select e from Restaurant e where e.restaurantManager.id = :id")
     Restaurant findByManagerId(long id);
+    List<Restaurant> findAll();
 }

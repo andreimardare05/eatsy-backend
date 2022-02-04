@@ -1,4 +1,6 @@
-delete from restaurant_menu_item_list;
+delete from user_order_item;
+delete from menu_item;
+delete from user_order;
 delete from restaurant_managers;
 delete from restaurant;
 delete from users;

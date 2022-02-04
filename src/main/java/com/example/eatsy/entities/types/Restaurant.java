@@ -30,10 +30,13 @@ public class Restaurant {
     private Integer closingTime;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "restaurant_id")
     private List<UserOrder> userOrders;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinColumn(name = "restaurant_id")
     private List<MenuItem> menuItems;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

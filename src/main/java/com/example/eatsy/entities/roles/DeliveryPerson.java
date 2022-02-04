@@ -21,7 +21,7 @@ import java.util.List;
 @Entity
 @SuperBuilder
 public class DeliveryPerson extends User {
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name= "delivery_orders")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<UserOrder> orders;
