@@ -23,7 +23,7 @@ public class RestaurantManagerService {
     }
 
     public void deleteRestaurantManagerById(long id) {
-        Optional<RestaurantManager> restaurantManager = restaurantManagerRepository.findById(id);
-        restaurantManagerRepository.delete(restaurantManager.get());
+        RestaurantManager restaurantManager = restaurantManagerRepository.findById(id);
+        restaurantManagerRepository.delete(restaurantManager);
     }
 }

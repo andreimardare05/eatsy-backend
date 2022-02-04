@@ -33,11 +33,11 @@ public class UserService {
     }
 
     public User updateUser(UserDto userDto) {
-        Optional<User> userFound = userRepository.findById(userDto.getId());
-        if (!userFound.isPresent())
+        User userFound = userRepository.findById(userDto.getId());
+        if (userFound == null)
             throw new RuntimeException("User not found");
 
-        User updatedUser = userFound.get();
+        User updatedUser = userFound;
         updatedUser.setEmail(userDto.getEmail());
         updatedUser.setUserStatus(userDto.getUserStatus());
         updatedUser.setFirstName(userDto.getFirstName());
@@ -51,8 +51,8 @@ public class UserService {
     }
 
     public void deleteUserById(long id) {
-        Optional<User> user = userRepository.findById(id);
-        userRepository.delete(user.get());
+        User user = userRepository.findById(id);
+        userRepository.delete(user);
     }
 
     public User save(SignupRequest signUpRequest) {

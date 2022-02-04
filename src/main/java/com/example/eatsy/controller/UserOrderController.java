@@ -1,11 +1,9 @@
 package com.example.eatsy.controller;
 
 import com.example.eatsy.config.JwtUtils;
-import com.example.eatsy.dto.UserDto;
 import com.example.eatsy.dto.UserOrderDto;
 import com.example.eatsy.services.UserOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +33,9 @@ public class UserOrderController {
 
     @PutMapping("/edit")
     @PreAuthorize("hasRole('RESTAURANT_MANAGER') or hasRole('DELIVERY_MAN') or hasRole('ADMIN')")
-    public ResponseEntity editOrder(@RequestBody UserOrderDto userOrderDto) {
-        return ResponseEntity.ok(this.userOrderService.updateUserOrder(userOrderDto));
+    public ResponseEntity editOrder(@RequestBody UserOrderDto userOrderDto,
+                                    @RequestHeader (name="Authorization") String token) {
+        long userId = Long.parseLong(jwtUtils.getIdFromJwtToken(token.split(" ")[1]));
+        return ResponseEntity.ok(this.userOrderService.updateUserOrder(userOrderDto, userId));
     }
 }

@@ -6,6 +6,7 @@ import com.example.eatsy.entities.roles.User;
 import com.example.eatsy.entities.types.*;
 import com.example.eatsy.observer.OrderDetails;
 import com.example.eatsy.observer.models.Observer;
+import com.example.eatsy.observer.models.Subject;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -35,7 +35,6 @@ public class Restaurant {
     private List<UserOrder> userOrders;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JoinColumn(name = "restaurant_id")
     private List<MenuItem> menuItems;
 

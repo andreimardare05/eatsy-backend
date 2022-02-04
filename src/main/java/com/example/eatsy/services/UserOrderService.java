@@ -3,13 +3,9 @@ package com.example.eatsy.services;
 import com.example.eatsy.dto.AddressDto;
 import com.example.eatsy.dto.UserOrderDto;
 import com.example.eatsy.entities.UserOrder;
-import com.example.eatsy.entities.roles.Customer;
-import com.example.eatsy.entities.roles.User;
+import com.example.eatsy.entities.roles.*;
 import com.example.eatsy.entities.types.*;
-import com.example.eatsy.repositories.CustomerRepository;
-import com.example.eatsy.repositories.MenuItemRepository;
-import com.example.eatsy.repositories.RestaurantRepository;
-import com.example.eatsy.repositories.UserOrderRepository;
+import com.example.eatsy.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +21,13 @@ public class UserOrderService {
     private UserOrderRepository userOrderRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private DeliveryRepository deliveryRepository;
 
     @Autowired
     private RestaurantRepository restaurantRepository;
@@ -34,7 +36,7 @@ public class UserOrderService {
     private MenuItemRepository menuItemRepository;
 
     public UserOrder save(UserOrderDto userOrderDto) {
-        Customer customer = customerRepository.findById(userOrderDto.getUserId()).get();
+        Customer customer = customerRepository.findById(userOrderDto.getUserId());
         Restaurant restaurant = restaurantRepository.findById(userOrderDto.getRestaurantId())
                 .get();
         AddressDto addressDto = userOrderDto.getAddress();
@@ -76,13 +78,19 @@ public class UserOrderService {
         return userOrderRepository.findAllByRestaurant(restaurantId);
     }
 
-    public UserOrder updateUserOrder(UserOrderDto userOrderDto) {
+    public UserOrder updateUserOrder(UserOrderDto userOrderDto, long userId) {
         Optional<UserOrder> orderFound = userOrderRepository.findById(userOrderDto.getId());
         if (!orderFound.isPresent())
             throw new RuntimeException("Order not found");
 
         UserOrder updatedUserOrder = orderFound.get();
         updatedUserOrder.setStatus(userOrderDto.getStatus());
+
+        User user = userRepository.findById(userId);
+        if (user.getRole().equals(ERole.ROLE_DELIVERY_MAN)) {
+            DeliveryPerson deliveryPerson = deliveryRepository.findById(userId);
+            updatedUserOrder.setDeliveryPerson(deliveryPerson);
+        }
         return userOrderRepository.save(updatedUserOrder);
     }
 }
