@@ -84,7 +84,17 @@ values(1,3);
 INSERT INTO restaurant_managers(restaurant_id, id)
 values(3,6);
 
-insert into menu_item(id,description,name,price,restaurant_id)
-values(11, 'White flour, mozzarela, mushrooms, meat, olives','Quattro Stagioni', 25.99, 1 );
+INSERT INTO address(ID, LONGITUDE, LATITUDE, ADDRESS)
+values(5, 26.13020912164588, 44.43118013598689, 'Bucuresti');
 
-#insert into user_order(id, status, total, address_id, customer_id, )
+insert into user_order(id, status, total, address_id, customer_id, restaurant_id)
+values(1,'PENDING',85.97,5,4,1);
+
+insert into user_order_item(id,menu_item_id,quantity,user_order_id )
+values(1,9,1,1);
+
+insert into user_order_item(id,menu_item_id,quantity,user_order_id )
+values(2,10,1,1);
+
+insert into user_order_item(id,menu_item_id,quantity,user_order_id )
+values(3,11,1,1);

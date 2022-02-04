@@ -32,6 +32,7 @@ public class UserOrder {
     private Restaurant restaurant;
     @ManyToOne
     private DeliveryPerson deliveryPerson;
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
     @OneToOne
     private Payment payment;
