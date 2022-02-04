@@ -29,6 +29,13 @@ public class UserOrderController {
         return ResponseEntity.ok(this.userOrderService.getRestaurantOrders(resturantId));
     }
 
+    @GetMapping("/user")
+    @PreAuthorize("hasRole('CUSTOMER')")
+    public ResponseEntity getUserOrders(@RequestHeader (name="Authorization") String token) {
+        long customerId = Long.parseLong(jwtUtils.getIdFromJwtToken(token.split(" ")[1]));
+        return ResponseEntity.ok(this.userOrderService.getUserOrders(customerId));
+    }
+
     @GetMapping("/all")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity getAllOrders() {

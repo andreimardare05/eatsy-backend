@@ -78,6 +78,10 @@ public class UserOrderService {
         return userOrderRepository.findAllByRestaurant(restaurantId);
     }
 
+    public List<UserOrder> getUserOrders(long userId) {
+        return userOrderRepository.findAllByUser(userId);
+    }
+
     public List<UserOrder> getAllOrders() {
         return userOrderRepository.findAll();
     }

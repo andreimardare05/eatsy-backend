@@ -66,8 +66,6 @@ values(2, 26.13020912194588, 44.43119013598689, 'Calea Calarasilor nr. 423, Bucu
 INSERT INTO restaurant(ID, NAME, ADDRESS_ID, DESCRIPTION, CONTACT, opening_time, closing_time )
 values(1, 'King Restaurant',2, 'This is a short description for Salsa Restaurant','0725413587',10,22);
 
-
-
 insert into menu_item(id,description,name,price,restaurant_id)
 values(9, 'Spaghetti pasta, tomatoes sauce, beaf meat, condiments','Spaghetti Bolognese', 28.99, 1 );
 
