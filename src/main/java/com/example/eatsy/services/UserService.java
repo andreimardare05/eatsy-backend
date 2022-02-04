@@ -47,6 +47,7 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
+        System.out.println(userRepository.findAll());
         return userRepository.findAll();
     }
 
@@ -86,7 +87,7 @@ public class UserService {
                 return userRepository.save(restaurantManager);
 
             case "ROLE_DELIVERY":
-                Role deliveryRole = roleRepository.findByName(ERole.ROLE_DELIVERY_MAN)
+                Role deliveryRole = roleRepository.findByName(ERole.ROLE_DELIVERY)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                 DeliveryPerson deliveryPerson  = DeliveryPerson.builder()
                         .firstName(signUpRequest.getFirstName())
