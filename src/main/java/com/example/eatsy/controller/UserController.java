@@ -25,7 +25,7 @@ public class UserController {
         return ResponseEntity.ok(this.userService.getAllUsers());
     }
 
-    @DeleteMapping("/delete/{deliveryId}")
+    @DeleteMapping("/delete/{userId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity deleteUserById(@Valid @PathVariable long userId) {
         this.userService.deleteUserById(userId);
@@ -33,7 +33,7 @@ public class UserController {
                 .body(null);
     }
 
-    @PutMapping("/edit/{userId}")
+    @PutMapping("/edit")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity editUserById(@RequestBody UserDto userDto) {
         return ResponseEntity.ok(this.userService.updateUser(userDto));

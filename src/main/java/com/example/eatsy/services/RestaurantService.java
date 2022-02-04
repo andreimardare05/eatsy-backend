@@ -31,7 +31,7 @@ public class RestaurantService {
         if(restaurantByManagerId != null) {
             throw new RuntimeException("Manager has restaurant");
         }
-        RestaurantManager restaurantManager = restaurantManagerRepository.findById(managerId).get();
+        RestaurantManager restaurantManager = restaurantManagerRepository.findById(managerId);
         AddressDto addressDto = restaurantDto.getAddress();
         Address address = new Address();
         if (addressDto != null) {

@@ -1,5 +1,7 @@
 package com.example.eatsy.entities.roles;
 
+import com.example.eatsy.observer.OrderDetails;
+import com.example.eatsy.observer.models.Observer;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -15,7 +17,7 @@ import javax.persistence.*;
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type")
-public class User {
+public class User implements Observer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,5 +34,10 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = encode;
+    }
+
+    @Override
+    public void update(OrderDetails details) throws Exception {
+
     }
 }

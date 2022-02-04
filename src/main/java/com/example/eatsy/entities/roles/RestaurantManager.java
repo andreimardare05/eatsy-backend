@@ -27,6 +27,8 @@ public class RestaurantManager extends User {
     @JoinTable(name= "restaurant_managers")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Restaurant restaurant;
+
+
     /*
     public RestaurantManager(String username, String password, String name, String email, String phone, Restaurant restaurant) {
         super(username, password, name, email, phone);

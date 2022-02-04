@@ -22,8 +22,8 @@ public class DeliveryService {
     }
 
     public void deleteDeliveryManById(long id) {
-        Optional<DeliveryPerson> deliveryPerson = deliveryRepository.findById(id);
-        deliveryRepository.delete(deliveryPerson.get());
+        DeliveryPerson deliveryPerson = deliveryRepository.findById(id);
+        deliveryRepository.delete(deliveryPerson);
     }
 
 }
